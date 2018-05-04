@@ -1,4 +1,4 @@
 node_modules
 
 test
-./src/npm*.log
+src/npm-debug.log
