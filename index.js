@@ -1,3 +1,4 @@
 #!/usr/bin/env node
-require('babel-register') // es6
+require('babel-register')
+require('babel-polyfill')
 require( './src' )
