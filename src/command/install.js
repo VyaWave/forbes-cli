@@ -2,7 +2,7 @@ var program = require( 'commander' );
 var inquirer = require( 'inquirer' );
 const downloadGitRepo = require('download-git-repo');
 
-import { getRepositoriesFromGithub } from '../service'
+// import { getRepositoriesFromGithub } from '../service'
 
 const fetchGithubRepoTemplate = (cb) => {
   downloadGitRepo('Template-Store/webpack-demo', process.cwd(), false, res => {
