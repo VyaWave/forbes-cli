@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {},
   "bin": {
-    "wave-cli": "./index.js"
+    "wave-cli": "bin/start.js"
   },
   "repository": {
     "type": "git",

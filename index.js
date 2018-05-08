@@ -19,5 +19,7 @@ require('babel-core').transform('code', {
     ]
   ]
 })
-
+// debug
+const pkg = require('./package.json')
+console.log('cli-version:', pkg.version)
 require('./src')
