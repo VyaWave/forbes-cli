@@ -1,62 +1,88 @@
-var program = require( 'commander' );
-var inquirer = require( 'inquirer' );
-const downloadGitRepo = require('download-git-repo');
+const program = require('commander')
+const inquirer = require('inquirer')
+const downloadGitRepo = require('download-git-repo')
+import { OraLoading } from '../utils/loading'
 
-// import { getRepositoriesFromGithub } from '../service'
+import { getRepositoriesFromGithub } from '../service'
+
+const service = new getRepositoriesFromGithub('org', 'Template-Store')
+
+const config = {
+  repoType: 'org', // org | user
+  repoScope: 'Template-Store'
+}
 
 const fetchGithubRepoTemplate = (cb) => {
-  downloadGitRepo('Template-Store/webpack-demo', process.cwd(), false, res => {
-    console.log(res ? 'SUCCESS' : "FAIL");
-  } )
+  downloadGitRepo('Template-Store/webpack-demo', './test', false, (errMark) => {
+    console.log(errMark ? 'Sorry Create Fail' : 'Create Success')
+  })
 }
 
 program
   .command('install')
-  .description( 'install github project to local' )
-  .action( function ( options ) {
-    console.log( 'install command' );
+  .description('install template project to current dir')
+  .action(async (options) => {
+    console.log('install command')
+
+    let loader = OraLoading('fetch repo list')
+    let repos = await service.fetchRepoList()
+    loader.succeed('fetch repo list success')
+    if (repos.length === 0) {
+      throw new Error(
+        `There is no any scaffolds in https://github.com/${
+          config.repoScope
+        }. Please create and try`
+      )
+    }
+
     //list命令的实现体
-    let choices = [ 'webpack', 'webpack-react', 'webpack-vue' ];
+    let choices = repos.map((r) => r.name)
 
     // 类型
-    let questions = [ {
+    const questions = [
+      {
         type: 'list',
         name: 'repo',
         message: 'which repo do you want to install?',
         choices
-    } ];
-
+      }
+    ]
     // 调用问题
-    inquirer.prompt( questions )
-      .then( answers => {
-        console.log( answers ); // 输出最终的答案
-        fetchGithubRepoTemplate()
-      } )
-    } 
-);
+    let answers = await inquirer.prompt(questions).then((answers) => {
+      console.log(answers) // 输出最终的答案
+      // fetchGithubRepoTemplate()
+      return answers
+    })
 
-program
-  .command('s')
-  .description( 'install github project to local' )
-  .action( function ( options ) {
-    console.log( 's command' );
-    //list命令的实现体
-    let choices = [ 'webpack', 'webpack-react', 'webpack-vue' ];
+    // 取出选择的git仓库
+    const repo = answers.repo
+    // 获取选择仓库所有的版本
 
-    // 类型
-    let questions = [ {
-        type: 'list',
-        name: 'repo',
-        message: 'which repo do you want to install?',
-        choices
-    } ];
+    let version
+    loader = OraLoading('fetch repo tag list')
+    const tags = await service.fetchRepoTagList(repo)
+    loader.succeed('fetch repo tag list success')
+    if (tags.length === 0) {
+      version = ''
+    } else {
+      choices = tags.map(({ name }) => name)
+      answers = await inquirer.prompt([
+        {
+          type: 'list',
+          name: 'version',
+          message: 'which version do you want to install?',
+          choices
+        }
+      ])
+      version = answers.version
+    }
 
-    // 调用问题
-    inquirer.prompt( questions )
-      .then( answers => {
-        console.log( answers ); // 输出最终的答案
-        fetchGithubRepoTemplate()
-      } )
-    } 
-);
-program.parse( process.argv ); //开始解析用户输入的命令
+    loader = OraLoading('begin download repo')
+    let result = await service.downloadGitRepo([repo, version].join('@'))
+    //console.log( result ? 'SUCCESS' : result )
+    loader.succeed('download repo success')
+    console.dir(result)
+  })
+
+//开始解析用户输入的命令
+program.parse(process.argv)

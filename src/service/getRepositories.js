@@ -1,38 +1,74 @@
-/**
- * 获取Git Repositories class
- * parameters orgName: Public Org
- * @export
- * @class getRepositoriesFromGithub
- */
+require('es6-promise').polyfill()
+
+import { basename } from 'path'
+const fetch = require('isomorphic-fetch')
+
+const downloadGitRepo = require('download-git-repo')
+
 export class getRepositoriesFromGithub {
-  /**
-   * 获取git仓库列表
-   */
-  constructor(orgName) {
-    console.info(orgName)
-    this.orgName = orgName
+  constructor(repoType, repoScope) {
+    this.repoType = repoType
+    this.repoScope = repoScope
   }
-  
-  async fetchRepoList() {}
 
-  /**
-   * 获取仓库所有的版本
-   * @param  {[string]} repo [仓库名称]
-   * @return {[type]}      [description]
-   */
-  async fetchRepoTagList( repo ) {}
+  /** Promise Base Fetch */
+  baseFetch(url) {
+    return fetch(url).then(function(response) {
+      if (response.status >= 400) {
+        throw new Error('Bad response from server')
+      }
+      const data = response.json()
+      if (data.message === 'Not Found') {
+        throw new Error('This Api Url Not Found')
+      }
+      console.log('baseFetch:', data)
+      return data
+    })
+  }
 
-  /**
-   * 获取仓库详细信息
-   * @param  {[string]} repo [仓库名称]
-   * @return {[type]}      [description]
-   */
-  async fetchGitInfo( repo ) {}
+  async fetchRepoList() {
+    const repoListApiUrl = `https://api.github.com/${this.repoType}s/${
+      this.repoScope
+    }/repos`
+    return await this.baseFetch(repoListApiUrl)
+  }
 
-  /**
-   * 下载git仓库代码到指定文件夹
-   * @param  {[string]} repo [仓库名称]
-   * @return {[type]}      [description]
-   */
-  async downloadGitRepo( repo ) {}
+  async fetchRepoTagList(repo) {
+    const { url } = await this.fetchGitInfo(repo)
+    const api = `https://api.github.com/repos/${url}/tags`
+
+    return this.baseFetch(api)
+  }
+
+  async fetchGitInfo(repo) {
+    let template = repo
+    let [scaffold] = template.split('@')
+
+    scaffold = basename(scaffold)
+
+    template = template
+      .split('@')
+      .filter(Boolean)
+      .join('#')
+    const url = `${this.repoScope}/${template}`
+    return {
+      url,
+      scaffold
+    }
+  }
+
+  async downloadGitRepo(repo) {
+    const { url, scaffold } = await this.fetchGitInfo(repo)
+
+    console.info(url, scaffold)
+    return new Promise((resolve, reject) => {
+      downloadGitRepo(url, `./test`, (err) => {
+        if (err) {
+          reject(err)
+          return
+        }
+        resolve(true)
+      })
+    })
+  }
 }
