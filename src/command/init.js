@@ -1,11 +1,16 @@
 var program = require('commander')
 var inquirer = require('inquirer')
+import { OraLoading } from '../utils/loading'
+import { readdir, exists } from 'mz/fs'
 
 program
   .command('init')
   .description('init github project to local')
   .action(function(options) {
     console.log('init command')
+
+    let loader
+    loader = OraLoading('check download dir')
     //list命令的实现体
     let choices = ['webpack', 'webpack-react', 'webpack-vue']
 
