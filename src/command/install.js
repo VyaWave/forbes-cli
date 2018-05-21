@@ -13,9 +13,14 @@ const config = {
 }
 
 const fetchGithubRepoTemplate = (cb) => {
-  downloadGitRepo('Template-Store/webpack-demo', './test', false, (errMark) => {
-    console.log(errMark ? 'Sorry Create Fail' : 'Create Success')
-  })
+  downloadGitRepo(
+    'Template-Store/webpack-demo',
+    process.cwd(),
+    false,
+    (errMark) => {
+      console.log(errMark ? 'Sorry Create Fail' : 'Create Success')
+    }
+  )
 }
 
 program
