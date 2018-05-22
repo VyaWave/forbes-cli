@@ -5,7 +5,11 @@
       {
         "targets": {
           "node": "current"
-        }
+        },
+        "modules": "commonjs",
+        "debug": true,
+        "useBuiltIns": true,
+        "loose": true
       }
     ]
   ],
