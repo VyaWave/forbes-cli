@@ -87,8 +87,7 @@ program
     loader = OraLoading('begin download repo')
     let result = await service.downloadGitRepo([repo, version].join('@'))
     //console.log( result ? 'SUCCESS' : result )
-    loader.succeed('download repo success')
-    console.dir(result)
+    loader.succeed('🔥🔥🔥🎉 🎉 🎉  Congratulations, U R Success')
   })
 
 //开始解析用户输入的命令
