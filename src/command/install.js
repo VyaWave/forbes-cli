@@ -12,6 +12,8 @@ const config = {
   repoScope: 'Template-Store'
 }
 
+console.info('cwd:', process.cwd())
+
 const fetchGithubRepoTemplate = (cb) => {
   downloadGitRepo(
     'Template-Store/webpack-demo',

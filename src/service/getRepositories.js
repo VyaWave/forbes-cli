@@ -62,7 +62,7 @@ export class getRepositoriesFromGithub {
 
     console.info(url, scaffold)
     return new Promise((resolve, reject) => {
-      downloadGitRepo(url, `./test`, (err) => {
+      downloadGitRepo(url, process.cwd(), (err) => {
         if (err) {
           reject(err)
           return
