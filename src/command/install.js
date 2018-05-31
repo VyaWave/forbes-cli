@@ -52,7 +52,6 @@ program
     ]
     // 调用问题
     let answers = await inquirer.prompt(questions).then((answers) => {
-      console.log(answers) // 输出最终的答案
       // fetchGithubRepoTemplate()
       return answers
     })
