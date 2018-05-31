@@ -21,7 +21,6 @@ export class getRepositoriesFromGithub {
       if (data.message === 'Not Found') {
         throw new Error('This Api Url Not Found')
       }
-      console.log('baseFetch:', data)
       return data
     })
   }
@@ -60,7 +59,6 @@ export class getRepositoriesFromGithub {
   async downloadGitRepo(repo) {
     const { url, scaffold } = await this.fetchGitInfo(repo)
 
-    console.info(url, scaffold)
     return new Promise((resolve, reject) => {
       downloadGitRepo(url, process.cwd(), (err) => {
         if (err) {
