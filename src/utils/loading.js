@@ -1,4 +1,4 @@
-import ora from 'ora'
+const ora = require('ora')
 
 export const OraLoading = (action = 'getting', repo = '') => {
   const oraOption = {

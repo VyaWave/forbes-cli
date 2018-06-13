@@ -1,7 +1,7 @@
 var program = require('commander')
 var inquirer = require('inquirer')
-import { OraLoading } from '../utils/loading'
-import { readdir, exists } from 'mz/fs'
+const { OraLoading } = require('../utils/loading')
+const { readdir, exists } = require('mz/fs')
 
 program
   .command('init')
