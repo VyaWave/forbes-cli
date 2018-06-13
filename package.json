@@ -34,5 +34,10 @@
     "isomorphic-fetch": "^2.2.1",
     "mz": "^2.7.0",
     "ora": "^2.1.0"
+  },
+  "devDependencies": {
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "transform-runtime": "^0.0.0"
   }
 }
