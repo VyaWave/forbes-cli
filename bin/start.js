@@ -1,4 +1,4 @@
 #!/usr/bin/env node
 
-require('../')
+require('../index.js')
 const pkg = require('../package.json')
