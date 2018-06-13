@@ -1,6 +1,6 @@
 {
   "name": "wave-cli",
-  "version": "0.0.3-alpha-6",
+  "version": "0.0.3-alpha-7",
   "description": "CLI Based On NodeJS",
   "main": "index.js",
   "scripts": {},
