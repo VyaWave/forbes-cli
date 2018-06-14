@@ -5,13 +5,9 @@
       {
         "targets": {
           "node": "current"
-        },
-        "debug": false,
-        "useBuiltIns": true,
-        "loose": true
+        }
       }
-    ],
-    "stage-0"
+    ]
   ],
   "plugins": ["transform-es2015-modules-commonjs"]
 }

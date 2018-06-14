@@ -7,7 +7,10 @@
  * 所以这句话主要是帮助脚本找到node的脚本解释器，可以理解为调用系统中的node来解析我们的脚本。
  */
 
-require('babel-register')
+require('babel-register')({
+  presets: ['env']
+})
+
 require('babel-polyfill')
 require('babel-core').transform('code', {
   presets: [

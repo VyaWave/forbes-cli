@@ -1,6 +1,6 @@
 require('es6-promise').polyfill()
 
-import { basename } from 'path'
+const { basename } = require('path')
 const fetch = require('isomorphic-fetch')
 
 const downloadGitRepo = require('download-git-repo')
