@@ -1,6 +1,6 @@
 const ora = require('ora')
 
-export const OraLoading = (action = 'getting', repo = '') => {
+module.exports = (action = 'getting', repo = '') => {
   const oraOption = {
     text: `${action} ${repo}`,
     spinner: 'weather'

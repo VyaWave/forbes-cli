@@ -5,7 +5,7 @@ const fetch = require('isomorphic-fetch')
 
 const downloadGitRepo = require('download-git-repo')
 
-export class getRepositoriesFromGithub {
+module.exports = class getRepositoriesFromGithub {
   constructor(repoType, repoScope) {
     this.repoType = repoType
     this.repoScope = repoScope

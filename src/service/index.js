@@ -1,1 +1,1 @@
-export * from './getRepositories'
+module.exports = require('./getRepositories')
