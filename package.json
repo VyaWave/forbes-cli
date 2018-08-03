@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AyAmeng/wave-cli.git"
+    "url": "git+https://github.com/AyAmeng/forbes.git"
   },
   "author": "372969383@qq.com",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/AyAmeng/wave-cli/issues"
+    "url": "https://github.com/AyAmeng/forbes/issues"
   },
-  "homepage": "https://github.com/AyAmeng/wave-cli#readme",
+  "homepage": "https://github.com/AyAmeng/forbes#readme",
   "dependencies": {
     "commander": "^2.15.1",
     "download-git-repo": "^1.0.2",
