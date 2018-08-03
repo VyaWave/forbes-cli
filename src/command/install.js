@@ -2,7 +2,6 @@ const program = require('commander')
 const inquirer = require('inquirer')
 const downloadGitRepo = require('download-git-repo')
 const OraLoading = require('../utils/loading')
-
 const getRepositoriesFromGithub = require('../service')
 
 const service = new getRepositoriesFromGithub('org', 'Template-Store')

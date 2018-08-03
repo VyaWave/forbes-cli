@@ -7,21 +7,9 @@
  * 所以这句话主要是帮助脚本找到node的脚本解释器，可以理解为调用系统中的node来解析我们的脚本。
  */
 
-require('babel-register')({
-  presets: ['env']
-})
-
-require('babel-polyfill')
-require('babel-core').transform('code', {
-  presets: [
-    [
-      require('babel-preset-latest-node'),
-      {
-        target: 'current'
-      }
-    ]
-  ]
-})
 // debug
 const pkg = require('./package.json')
+
+console.info('U are use forbes that version is ', pkg.version)
+
 require('./src')
