@@ -1,6 +1,6 @@
 var program = require('commander')
 var inquirer = require('inquirer')
-const { OraLoading } = require('../utils/loading')
+const OraLoading = require('../utils/loading')
 const { readdir, exists } = require('mz/fs')
 
 program

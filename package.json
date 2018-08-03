@@ -1,11 +1,11 @@
 {
   "name": "forbes",
-  "version": "0.0.4",
+  "version": "0.0.1",
   "description": "CLI Based On NodeJS",
   "main": "index.js",
   "scripts": {},
   "bin": {
-    "wave-cli": "bin/start.js"
+    "forbes": "bin/start.js"
   },
   "repository": {
     "type": "git",
