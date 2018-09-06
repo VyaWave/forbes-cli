@@ -4,16 +4,16 @@ const downloadGitRepo = require('download-git-repo')
 const OraLoading = require('../utils/loading')
 const getRepositoriesFromGithub = require('../service')
 
-const service = new getRepositoriesFromGithub('org', 'Template-Store')
+const service = new getRepositoriesFromGithub('org', 'magic-store')
 
 const config = {
   repoType: 'org', // org | user
-  repoScope: 'Template-Store'
+  repoScope: 'magic-store'
 }
 
 const fetchGithubRepoTemplate = (cb) => {
   downloadGitRepo(
-    'Template-Store/webpack-demo',
+    'magic-store/webpack-demo',
     process.cwd(),
     false,
     (errMark) => {

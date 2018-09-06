@@ -26,5 +26,28 @@
     "isomorphic-fetch": "^2.2.1",
     "mz": "^2.7.0",
     "ora": "^2.1.0"
+  },
+  "devDependencies": {
+    "commitizen": "^2.10.1",
+    "emoji-cz": "^0.3.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/emoji-cz",
+      "emoji-cz": {
+        "types": {
+          "Fix": {
+            "emoji": "🐝",
+            "name": "Bug",
+            "description": "Dirty bug"
+          },
+          "Chore": {
+            "emoji": "✨",
+            "description": "Other changes that don't modify src or test files"
+          }
+        },
+        "format": "[emoji] [name]: [subject]"
+      }
+    }
   }
 }
