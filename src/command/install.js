@@ -13,7 +13,7 @@ const config = {
 
 const fetchGithubRepoTemplate = (cb) => {
   downloadGitRepo(
-    'magic-store/webpack-demo',
+    'magic-store/webpack-standard',
     process.cwd(),
     false,
     (errMark) => {

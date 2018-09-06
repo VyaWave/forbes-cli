@@ -13,7 +13,13 @@ module.exports = class getRepositoriesFromGithub {
 
   /** Promise Base Fetch */
   baseFetch(url) {
-    return fetch(url).then(function(response) {
+    return fetch(url, { 
+      method: 'GET',
+      headers: {
+        'User-Agent': 'AyAmeng'
+      }
+    }).then(function(response) {
+      console.info(response.statusText)
       if (response.status >= 400) {
         throw new Error('Bad response from server')
       }
