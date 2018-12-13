@@ -20,7 +20,14 @@ module.exports = class getRepositoriesFromGithub {
       }
     })
       .then(function(response) {
-        console.info(response.statusText)
+        console.info(
+          'statusText',
+          response.statusText,
+          'url',
+          url,
+          'response',
+          response
+        )
         if (response.status >= 400) {
           throw new Error('Bad response from server')
         }
