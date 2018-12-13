@@ -13,22 +13,26 @@ module.exports = class getRepositoriesFromGithub {
 
   /** Promise Base Fetch */
   baseFetch(url) {
-    return fetch(url, { 
+    return fetch(url, {
       method: 'GET',
       headers: {
-        'User-Agent': 'AyAmeng'
+        'User-Agent': 'RVya'
       }
-    }).then(function(response) {
-      console.info(response.statusText)
-      if (response.status >= 400) {
-        throw new Error('Bad response from server')
-      }
-      const data = response.json()
-      if (data.message === 'Not Found') {
-        throw new Error('This Api Url Not Found')
-      }
-      return data
     })
+      .then(function(response) {
+        console.info(response.statusText)
+        if (response.status >= 400) {
+          throw new Error('Bad response from server')
+        }
+        const data = response.json()
+        if (data.message === 'Not Found') {
+          throw new Error('This Api Url Not Found')
+        }
+        return data
+      })
+      .catch((err) => {
+        throw new Error('Authentication failed')
+      })
   }
 
   async fetchRepoList() {
