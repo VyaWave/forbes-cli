@@ -1,6 +1,6 @@
 {
   "name": "forbes",
-  "version": "0.0.66-beta.2",
+  "version": "0.0.66",
   "description": "CLI Based On NodeJS",
   "main": "index.js",
   "scripts": {},
