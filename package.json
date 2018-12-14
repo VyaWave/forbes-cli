@@ -23,11 +23,11 @@
     "es6-promise": "^4.2.4",
     "fsevents": "^1.2.4",
     "inquirer": "^5.2.0",
-    "isomorphic-fetch": "^2.2.1",
     "mz": "^2.7.0",
     "ora": "^2.1.0"
   },
   "devDependencies": {
+    "axios": "^0.18.0",
     "commitizen": "^2.10.1",
     "emoji-cz": "^0.3.0"
   },

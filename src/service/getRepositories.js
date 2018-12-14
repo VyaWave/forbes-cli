@@ -1,9 +1,21 @@
 require('es6-promise').polyfill()
 
+const axios = require('axios')
+
 const { basename } = require('path')
-const fetch = require('isomorphic-fetch')
 
 const downloadGitRepo = require('download-git-repo')
+
+const service = axios.create({
+  headers: {
+    'User-Agent': 'RVya'
+  }
+})
+
+service.interceptors.request.use(function(config) {
+  console.info(config.headers, '<=config')
+  return config
+})
 
 module.exports = class getRepositoriesFromGithub {
   constructor(repoType, repoScope) {
@@ -13,21 +25,9 @@ module.exports = class getRepositoriesFromGithub {
 
   /** Promise Base Fetch */
   baseFetch(url) {
-    return fetch(url, {
-      method: 'GET',
-      headers: {
-        'User-Agent': 'RVya'
-      }
-    })
-      .then(function(response) {
-        console.info(
-          'statusText',
-          response.statusText,
-          'url',
-          url,
-          'response',
-          response
-        )
+    return service
+      .get(url)
+      .then((response) => {
         if (response.status >= 400) {
           throw new Error('Bad response from server')
         }
@@ -38,8 +38,36 @@ module.exports = class getRepositoriesFromGithub {
         return data
       })
       .catch((err) => {
+        console.info(err)
         throw new Error('Authentication failed')
       })
+    // return fetch(url, {
+    //   method: 'GET',
+    //   headers: {
+    //     'User-Agent': 'RVya'
+    //   }
+    // })
+    //   .then(function(response) {
+    //     console.info(
+    //       'statusText',
+    //       response.statusText,
+    //       'url',
+    //       url,
+    //       'response',
+    //       response
+    //     )
+    //     if (response.status >= 400) {
+    //       throw new Error('Bad response from server')
+    //     }
+    //     const data = response.json()
+    //     if (data.message === 'Not Found') {
+    //       throw new Error('This Api Url Not Found')
+    //     }
+    //     return data
+    //   })
+    //   .catch((err) => {
+    //     throw new Error('Authentication failed')
+    //   })
   }
 
   async fetchRepoList() {
