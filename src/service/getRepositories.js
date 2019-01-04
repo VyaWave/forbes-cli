@@ -8,12 +8,12 @@ const downloadGitRepo = require('download-git-repo')
 
 const service = axios.create({
   headers: {
-    'User-Agent': 'RVya'
+    'User-Agent': 'RVya',
+    Authorization: 'token ee04e6d05dee078380f8d5e7bbb7f2922981d1de'
   }
 })
 
 service.interceptors.request.use(function(config) {
-  console.info(config.headers, '<=config')
   return config
 })
 
@@ -41,33 +41,6 @@ module.exports = class getRepositoriesFromGithub {
         console.info(err)
         throw new Error('Authentication failed')
       })
-    // return fetch(url, {
-    //   method: 'GET',
-    //   headers: {
-    //     'User-Agent': 'RVya'
-    //   }
-    // })
-    //   .then(function(response) {
-    //     console.info(
-    //       'statusText',
-    //       response.statusText,
-    //       'url',
-    //       url,
-    //       'response',
-    //       response
-    //     )
-    //     if (response.status >= 400) {
-    //       throw new Error('Bad response from server')
-    //     }
-    //     const data = response.json()
-    //     if (data.message === 'Not Found') {
-    //       throw new Error('This Api Url Not Found')
-    //     }
-    //     return data
-    //   })
-    //   .catch((err) => {
-    //     throw new Error('Authentication failed')
-    //   })
   }
 
   async fetchRepoList() {
