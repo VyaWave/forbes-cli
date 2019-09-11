@@ -1,21 +1,10 @@
 require('es6-promise').polyfill()
 
-const axios = require('axios')
-
 const { basename } = require('path')
 
+const request = require('request')
+
 const downloadGitRepo = require('download-git-repo')
-
-const service = axios.create({
-  headers: {
-    'User-Agent': 'RVya',
-    Authorization: 'token ee04e6d05dee078380f8d5e7bbb7f2922981d1de'
-  }
-})
-
-service.interceptors.request.use(function(config) {
-  return config
-})
 
 module.exports = class getRepositoriesFromGithub {
   constructor(repoType, repoScope) {
@@ -23,38 +12,44 @@ module.exports = class getRepositoriesFromGithub {
     this.repoScope = repoScope
   }
 
-  /** Promise Base Fetch */
-  baseFetch(url) {
-    return service
-      .get(url)
-      .then((response) => {
-        if (response.status >= 400) {
-          throw new Error('Bad response from server')
+  fetch(api) {
+    return new Promise((resolve, reject) => {
+      request(
+        {
+          url: api,
+          method: 'GET',
+          headers: {
+            'User-Agent': 'RVya'
+          }
+        },
+        (err, res, body) => {
+          if (err) {
+            reject(err)
+            return
+          }
+          const data = JSON.parse(body)
+          if (data.message === 'Not Found') {
+            reject(new Error(`${api} is not found`))
+          } else {
+            resolve(data)
+          }
         }
-        const data = response.json()
-        if (data.message === 'Not Found') {
-          throw new Error('This Api Url Not Found')
-        }
-        return data
-      })
-      .catch((err) => {
-        console.info(err)
-        throw new Error('Authentication failed')
-      })
+      )
+    })
   }
 
   async fetchRepoList() {
     const repoListApiUrl = `https://api.github.com/${this.repoType}s/${
       this.repoScope
     }/repos`
-    return await this.baseFetch(repoListApiUrl)
+    return await this.fetch(repoListApiUrl)
   }
 
   async fetchRepoTagList(repo) {
     const { url } = await this.fetchGitInfo(repo)
     const api = `https://api.github.com/repos/${url}/tags`
 
-    return this.baseFetch(api)
+    return this.fetch(api)
   }
 
   async fetchGitInfo(repo) {

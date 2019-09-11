@@ -25,7 +25,8 @@
     "fsevents": "^1.2.4",
     "inquirer": "^5.2.0",
     "mz": "^2.7.0",
-    "ora": "^2.1.0"
+    "ora": "^2.1.0",
+    "request": "^2.88.0"
   },
   "devDependencies": {
     "commitizen": "^2.10.1",
