@@ -39,9 +39,7 @@ module.exports = class getRepositoriesFromGithub {
   }
 
   async fetchRepoList() {
-    const repoListApiUrl = `https://api.github.com/${this.repoType}s/${
-      this.repoScope
-    }/repos`
+    const repoListApiUrl = `https://api.github.com/${this.repoType}s/${this.repoScope}/repos`
     return await this.fetch(repoListApiUrl)
   }
 
@@ -58,10 +56,7 @@ module.exports = class getRepositoriesFromGithub {
 
     scaffold = basename(scaffold)
 
-    template = template
-      .split('@')
-      .filter(Boolean)
-      .join('#')
+    template = template.split('@').filter(Boolean).join('#')
     const url = `${this.repoScope}/${template}`
     return {
       url,

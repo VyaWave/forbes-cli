@@ -1,24 +1,25 @@
 {
-  "name": "forbes",
+  "name": "forbes-cli",
   "version": "0.0.72",
   "description": "CLI Based On NodeJS",
   "main": "index.js",
   "scripts": {},
   "bin": {
-    "forbes": "bin/start.js"
+    "forbes-cli": "bin/start.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AyAmeng/forbes.git"
+    "url": "git+https://github.com/VyaWave/webapp-creator-cli.git"
   },
   "author": "372969383@qq.com",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/AyAmeng/forbes/issues"
+    "url": "https://github.com/VyaWave/webapp-creator-cli"
   },
-  "homepage": "https://github.com/AyAmeng/forbes#readme",
+  "homepage": "https://github.com/VyaWave/webapp-creator-cli#readme",
   "dependencies": {
     "axios": "^0.18.0",
+    "babel-preset-es2015": "^6.24.1",
     "commander": "^2.15.1",
     "download-git-repo": "^1.0.2",
     "es6-promise": "^4.2.4",
@@ -29,6 +30,7 @@
     "request": "^2.88.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "commitizen": "^2.10.1",
     "emoji-cz": "^0.3.0"
   },

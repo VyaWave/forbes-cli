@@ -25,15 +25,20 @@ const fetchGithubRepoTemplate = (cb) => {
 program
   .command('install')
   .description('install template project to current dir')
+  .on('--help', function () {
+    console.log('  Examples:')
+    console.log()
+    console.log('    $ deploy exec sequential')
+    console.log()
+  })
   .action(async (options) => {
     let loader = OraLoading('fetch repo list')
     let repos = await service.fetchRepoList()
+
     loader.succeed('fetch repo list success')
     if (repos.length === 0) {
       throw new Error(
-        `There is no any scaffolds in https://github.com/${
-          config.repoScope
-        }. Please create and try`
+        `There is no any scaffolds in https://github.com/${config.repoScope}. Please create and try`
       )
     }
 
